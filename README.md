@@ -1,5 +1,16 @@
 # UK Driving Test Finder
 
+#### Quick Description
+
+This uses an undetected chromedriver to go to the Gov Website to check for any driving tests within the next 3 days. 
+It checks betweenn 30-31m as to not be super consistent to stop potential Imperva blocks, this can be adjusted to your liking via the `startTimer` function, WARNING going too low may cause Imperva to block you for making too many requests.
+
+
+This is not running in headless mode as i did not want it to as it flagged Imperva. You can easily change that by setting headless to true
+```
+driver = uc.Chrome(headless=True)
+```
+
 
 This is a simple python script that integrates with Pushover (https://pushover.net/)
 
