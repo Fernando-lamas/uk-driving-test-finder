@@ -1,21 +1,16 @@
 import os
+from dotenv import find_dotenv, load_dotenv
 from selenium.webdriver.common.by import By
 import selenium.webdriver.support.expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 import requests, time, threading, random
 import undetected_chromedriver as uc
 
-info = {
-  "drivingLicenseNumber": os.environ['DRIVING_LICENSE_NUMBER'],
-  "drivingTestReferenceNumber": os.environ['DRIVING_TEST_REFERENCENUMBER'],
-  "postcode" : os.environ['POSTCODE']
-}
-
 
 def pushNotification():
     requests.post('https://api.pushover.net/1/messages.json', {
-    "token": os.environ['API_TOKEN'],
-    "user": os.environ['API_USER'],
+    "token": os.getenv('API_TOKEN'),
+    "user": os.getenv('API_USER'),
     "message": "DRIVING TEST FOUND",
     "url" : "https://driverpracticaltest.dvsa.gov.uk/login",
     "priority" : "1"
@@ -27,14 +22,14 @@ def checkForTest():
     driver.get("https://driverpracticaltest.dvsa.gov.uk/login")
 
     try:
-        WebDriverWait(driver,30).until(EC.presence_of_element_located((By.ID,"driving-licence-number"))).send_keys(info["drivingLicenseNumber"])
-        WebDriverWait(driver,30).until(EC.presence_of_element_located((By.ID,"application-reference-number"))).send_keys(info["drivingTestReferenceNumber"])
+        WebDriverWait(driver,30).until(EC.presence_of_element_located((By.ID,"driving-licence-number"))).send_keys(os.getenv('DRIVING_LICENSE_NUMBER'))
+        WebDriverWait(driver,30).until(EC.presence_of_element_located((By.ID,"application-reference-number"))).send_keys(os.getenv('DRIVING_TEST_REFERENCENUMBER'))
 
         WebDriverWait(driver,30).until(EC.presence_of_element_located((By.ID,"booking-login"))).click()
 
         WebDriverWait(driver,30).until(EC.presence_of_element_located((By.ID,"short-notice-slots-view"))).click()
 
-        WebDriverWait(driver,30).until(EC.presence_of_element_located((By.ID,"postcode-input"))).send_keys(info["postcode"])
+        WebDriverWait(driver,30).until(EC.presence_of_element_located((By.ID,"postcode-input"))).send_keys(os.getenv('POSTCODE'))
 
         WebDriverWait(driver,30).until(EC.presence_of_element_located((By.ID,"test-centres-submit"))).click()
     except:
@@ -60,4 +55,5 @@ def startTimer():
 
 
 if __name__ == "__main__":
+    load_dotenv(find_dotenv())
     startTimer()
