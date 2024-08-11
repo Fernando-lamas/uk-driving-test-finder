@@ -4,7 +4,7 @@
 This is a simple python script that integrates with Pushover (https://pushover.net/)
 
 
-This requires a `.env` file with this structure : 
+This requires a `.env` file with this structure in the same directory as the `TestFinder.py`: 
 ```
 DRIVING_LICENSE_NUMBER = ''
 DRIVING_TEST_REFERENCENUMBER = ''
