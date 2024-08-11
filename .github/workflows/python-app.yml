@@ -25,7 +25,7 @@ jobs:
           DRIVING_TEST_REFERENCENUMBER: ${{secrets.DRIVING_TEST_REFERENCENUMBER}}
           POSTCODE: ${{secrets.POSTCODE}}
           API_TOKEN: ${{secrets.API_TOKEN}}
-          API_USER: ${{API_USER}}
+          API_USER: ${{secrets.API_USER}}
       uses: actions/setup-python@v3
       with:
         python-version: "3.10"
