@@ -20,12 +20,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python 3.10
-      env:
-          DRIVING_LICENSE_NUMBER: ${{secrets.DRIVING_LICENSE_NUMBER}}
-          DRIVING_TEST_REFERENCENUMBER: ${{secrets.DRIVING_TEST_REFERENCENUMBER}}
-          POSTCODE: ${{secrets.POSTCODE}}
-          API_TOKEN: ${{secrets.API_TOKEN}}
-          API_USER: ${{secrets.API_USER}}
       uses: actions/setup-python@v3
       with:
         python-version: "3.10"
